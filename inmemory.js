@@ -8,10 +8,10 @@ const proxy = () => through(function (data, enc, cb) {
 })
 
 class InMemoryContentAddressableStorage {
-  constructor (algo = 'sha256', createHasher = createHasher) {
+  constructor (algo = 'sha256', _createHasher = createHasher) {
     this._store = new Map()
     this._algo = algo
-    this._createHasher = createHasher
+    this._createHasher = _createHasher
   }
 
   getBuffer (hash, cb) {
