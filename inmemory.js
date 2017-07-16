@@ -46,7 +46,7 @@ class InMemoryContentAddressableStorage {
 
   set (value, cb) {
     let _value = bl()
-    let hasher = createHasher('sha256', (err, hash) => {
+    let hasher = this._createHasher('sha256', (err, hash) => {
       if (err) return cb(err)
       this._store.set(hash, _value)
       cb(null, hash)
