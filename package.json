@@ -25,11 +25,16 @@
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "coveralls": "^2.13.1",
     "commitizen": "^2.9.6",
+    "coveralls": "^2.13.1",
     "cracks": "^3.1.2",
     "cz-conventional-changelog": "^2.0.0",
     "husky": "^0.14.3",
     "validate-commit-msg": "^2.12.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
