@@ -1,6 +1,6 @@
 {
   "name": "lucass",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "",
   "main": "fs.js",
   "directories": {
@@ -13,7 +13,8 @@
     "precommit": "npm test",
     "prepush": "npm test",
     "commitmsg": "validate-commit-msg",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [],
   "author": "Mikeal Rogers <mikeal.rogers@gmail.com>",
@@ -30,11 +31,16 @@
     "cracks": "^3.1.2",
     "cz-conventional-changelog": "^2.0.0",
     "husky": "^0.14.3",
-    "validate-commit-msg": "^2.12.2"
+    "validate-commit-msg": "^2.12.2",
+    "semantic-release": "^6.3.6"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikeal/lucass.git"
   }
 }
