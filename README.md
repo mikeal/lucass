@@ -9,6 +9,8 @@
 
 # lucass (Lightweight Universal Content Addressabile Storage Spec)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mikeal/lucass.svg)](https://greenkeeper.io/)
+
 There are a bunch of content addressable stores out there, and even some abstract store specs. A few things that are different about lucass:
 
 * There is **NO** requirement that implementations use a specific hashing method, only that the method they use is consistent.
