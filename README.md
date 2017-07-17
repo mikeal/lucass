@@ -1,4 +1,4 @@
-# lucass (Lightweight Universal Content Addressabile Storage Spec)
+# lucass (Lightweight Universal Content Addressable Storage Spec)
 
 [![Coverage Status](https://coveralls.io/repos/github/mikeal/lucass/badge.svg?branch=master)](https://coveralls.io/github/mikeal/lucass?branch=master)
 [![Build Status](https://travis-ci.org/mikeal/lucass.svg?branch=master)](https://travis-ci.org/mikeal/lucass)
