@@ -45,4 +45,26 @@ class Store {
 
 ## In-Memory Implementation
 
+```javascript
+let store = require('lucass/inmemory')()
+store.set(Buffer.from('asdf'), (err, hash) => {
+  store.getBuffer(hash, (err, value) => {
+    console.log(value.toString) // 'asdf'
+  })
+})
+```
+
+Additionally, all methods in the spec are implemented.
+
 ## Filesystem Implementation
+
+```javascript
+let store = require('lucass/fs')('/var/custom-directory')
+store.set(Buffer.from('asdf'), (err, hash) => {
+  store.getBuffer(hash, (err, value) => {
+    console.log(value.toString) // 'asdf'
+  })
+})
+```
+
+Additionally, all methods in the spec are implemented.
