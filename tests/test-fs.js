@@ -23,8 +23,7 @@ test('fs(implementation): directory does not exist', t => {
 
 test('fs(implementation): hash error in hash()', t => {
   t.plan(1)
-  let store = fsStore(testdir)
-  store._createHasher = failHasher
+  let store = fsStore(testdir, 'noop', failHasher)
   store.hash(Buffer.from('asdf'), err => {
     t.type(err, 'Error')
   })
@@ -32,8 +31,7 @@ test('fs(implementation): hash error in hash()', t => {
 
 test('fs(implementation): hash error in set()', t => {
   t.plan(2)
-  let store = fsStore(testdir)
-  store._createHasher = failHasher
+  let store = fsStore(testdir, 'noop', failHasher)
   store.set(Buffer.from('asdf'), err => {
     t.type(err, 'Error')
   })
@@ -68,6 +66,21 @@ test('fs(implementation): filesystem errors, fs.writeFile()', t => {
     fs.writeFile = _writeFile
     t.type(err, 'Error')
   })
+})
+
+test('fs(implementation): slow hasher', t => {
+  t.plan(2)
+  const slowHasher = (algo, cb) => {
+    return through(() => setTimeout(() => cb(null, 'asdf'), 100))
+  }
+  let store = fsStore(testdir, 'noop', slowHasher)
+  let stream = bl()
+  store.set(stream, (err, hash) => {
+    t.error(err)
+    t.equal(hash, 'asdf')
+  })
+  stream.write(Buffer.from('asdf'))
+  stream.end()
 })
 
 let rimraf = require('rimraf')

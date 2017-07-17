@@ -1,13 +1,15 @@
 const fs = require('fs')
 const path = require('path')
 const once = require('once')
-const util = require('util')
 const createHasher = require('hashes-stream')
 
 const isDirectory = dir => fs.statSync(dir).isDirectory()
 
 class FileSystemContentAddressableStorage {
   constructor (dir, algo = 'sha256', _createHasher = createHasher) {
+    /* This statement is tested but because it gets wrapped in a try/catch
+       the coverage report doesn't notice. */
+    /* istanbul ignore if */
     if (!isDirectory(dir)) throw new Error('Not a directory.')
     this.dir = dir
     this._algo = algo

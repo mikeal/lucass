@@ -11,8 +11,7 @@ const failHasher = (algo, cb) => {
 
 test('inmemory: (implementation) hash error in hash()', t => {
   t.plan(1)
-  let store = inmemory()
-  store._createHasher = failHasher
+  let store = inmemory('noop', failHasher)
   store.hash(Buffer.from('asdf'), err => {
     t.type(err, 'Error')
   })
@@ -20,8 +19,7 @@ test('inmemory: (implementation) hash error in hash()', t => {
 
 test('inmemory: (implementation) hash error in set()', t => {
   t.plan(1)
-  let store = inmemory()
-  store._createHasher = failHasher
+  let store = inmemory('noop', failHasher)
   store.set(Buffer.from('asdf'), err => {
     t.type(err, 'Error')
   })

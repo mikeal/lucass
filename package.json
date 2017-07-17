@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "tap tests/*.js",
+    "test": "tap tests/*.js && standard",
     "cover": "tap tests/*.js --cov --coverage-report=lcov",
     "precommit": "npm test",
     "prepush": "npm test",
@@ -33,6 +33,7 @@
     "husky": "^0.14.3",
     "rimraf": "^2.6.1",
     "semantic-release": "^6.3.6",
+    "standard": "^10.0.2",
     "validate-commit-msg": "^2.12.2"
   },
   "config": {
