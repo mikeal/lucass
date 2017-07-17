@@ -40,8 +40,10 @@ class InMemoryContentAddressableStorage {
       hasher.end()
       return
     }
-    // TODO: validate value is a stream
-    value.pipe(hasher)
+    if (value && typeof value === 'object' && value.readable) {
+      return value.pipe(hasher)
+    }
+    process.nextTick(() => cb(new Error('value is a not a valid type')))
   }
 
   set (value, cb) {
@@ -58,9 +60,12 @@ class InMemoryContentAddressableStorage {
       hasher.end()
       return
     }
-    // TODO: validate value is a stream.
-    value.pipe(hasher)
-    value.pipe(_value)
+    if (value && typeof value === 'object' && value.readable) {
+      value.pipe(hasher)
+      value.pipe(_value)
+      return
+    }
+    process.nextTick(() => cb(new Error('value is a not a valid type')))
   }
 }
 

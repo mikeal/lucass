@@ -8,7 +8,6 @@ const isDirectory = dir => fs.statSync(dir).isDirectory()
 
 class FileSystemContentAddressableStorage {
   constructor (dir, algo = 'sha256', _createHasher = createHasher) {
-    console.log(dir)
     if (!isDirectory(dir)) throw new Error('Not a directory.')
     this.dir = dir
     this._algo = algo
@@ -18,7 +17,7 @@ class FileSystemContentAddressableStorage {
     if (Buffer.isBuffer(value)) {
       return this._setBuffer(value, cb)
     }
-    if (typeof value === 'object' && value.readable) {
+    if (value && typeof value === 'object' && value.readable) {
       return this._setStream(value, cb)
     }
     process.nextTick(() => cb(new Error('value is a not a valid type')))
@@ -30,7 +29,7 @@ class FileSystemContentAddressableStorage {
       hasher.end()
       return
     }
-    if (typeof value === 'object' && value.readable) {
+    if (value && typeof value === 'object' && value.readable) {
       return value.pipe(hasher)
     }
     process.nextTick(() => cb(new Error('value is a not a valid type')))
@@ -70,33 +69,6 @@ class FileSystemContentAddressableStorage {
     value.pipe(hasher)
   }
 
-  // _setStream (value, cb) {
-  //   cb = once(cb)
-  //   let hash
-  //   let hasher = util.promisify(this._createHasher)(this._algo)
-  //   hasher.then(_hash => {
-  //     console.log('hash', hash)
-  //     hash = _hash
-  //     fs.rename(tmpfile, path.join(this.dir, hash), err => {
-  //       if (err) return cb(err)
-  //       cb(null, hash)
-  //     })
-  //   })
-  //   let tmpfile = path.join(this.dir, '.' + Date.now() + Math.random())
-  //   let filepromise = new Promise((resolve, reject) => {
-  //     let file = fs.createWriteStream(tmpfile)
-  //     file.on('error', err => reject(err))
-  //     file.on('close', () => resolve())
-  //     value.pipe(file)
-  //   })
-  //   let all = Promise.all(hasher, filepromise)
-  //   all.then(() => {
-  //     fs.rename(tmpfile, path.join(this.dir, hash), err => {
-  //       if (err) return cb(err)
-  //       cb(null, hash)
-  //     })
-  //   })
-  // }
   getBuffer (hash, cb) {
     fs.readFile(path.join(this.dir, hash), cb)
   }
