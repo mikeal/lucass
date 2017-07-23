@@ -8,8 +8,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "tap tests/*.js && standard",
-    "cover": "tap tests/*.js --cov --coverage-report=lcov",
+    "test": "tap tests/*.js --100 && standard",
+    "cover": "tap tests/*.js --coverage-report=lcov && codecov",
     "precommit": "npm test",
     "prepush": "npm test",
     "commitmsg": "validate-commit-msg",
@@ -26,6 +26,7 @@
     "through2": "^2.0.3"
   },
   "devDependencies": {
+    "codecov": "^2.2.0",
     "commitizen": "^2.9.6",
     "coveralls": "^2.13.1",
     "cracks": "^3.1.2",
@@ -34,7 +35,7 @@
     "rimraf": "^2.6.1",
     "semantic-release": "^6.3.6",
     "standard": "^10.0.2",
-    "validate-commit-msg": "^2.12.2"
+    "validate-commit-msg": "^2.13.1"
   },
   "config": {
     "commitizen": {
