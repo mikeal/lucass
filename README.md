@@ -43,6 +43,21 @@ class Store {
 }
 ```
 
+There are also optional APIs. These are not required as they may not be
+possible on top of certain storage but *may* be required by certain users
+of an implementation.
+
+```javascript
+class Store {
+  set (value, ...args, cb) {
+    // Optional args are sent to the hashing function..
+  }
+  hash (value, ...args, cb) {
+    // Optional args are sent to the hashing function.
+  }
+}
+```
+
 ## In-Memory Implementation
 
 ```javascript

@@ -83,6 +83,21 @@ test('fs(implementation): slow hasher', t => {
   stream.end()
 })
 
+test('fs(implementation): hasher args', t => {
+  t.plan(4)
+  const argHasher = (one, two, three, cb) => {
+    t.same([one, two, three], [1, 2, 3])
+    return through(() => setTimeout(() => cb(null, 'asdf'), 100))
+  }
+  let store = fsStore(testdir, argHasher)
+  store.set(Buffer.from('asdf'), 1, 2, 3, (err, hash) => {
+    t.error(err)
+  })
+  store.hash(Buffer.from('asdf'), 1, 2, 3, (err, hash) => {
+    t.error(err)
+  })
+})
+
 let rimraf = require('rimraf')
 
 process.on('beforeExit', () => {
