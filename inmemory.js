@@ -8,9 +8,8 @@ const proxy = () => through(function (data, enc, cb) {
 })
 
 class InMemoryContentAddressableStorage {
-  constructor (algo = 'sha256', _createHasher = createHasher) {
+  constructor (_createHasher = (cb) => createHasher('sha256', cb)) {
     this._store = new Map()
-    this._algo = algo
     this._createHasher = _createHasher
   }
 
@@ -30,8 +29,9 @@ class InMemoryContentAddressableStorage {
     return stream
   }
 
-  hash (value, cb) {
-    let hasher = this._createHasher(this._algo, (err, hash) => {
+  hash (value, ...args) {
+    let cb = args.pop()
+    let hasher = this._createHasher(...args, (err, hash) => {
       if (err) return cb(err)
       cb(null, hash)
     })
@@ -46,9 +46,10 @@ class InMemoryContentAddressableStorage {
     process.nextTick(() => cb(new Error('value is a not a valid type')))
   }
 
-  set (value, cb) {
+  set (value, ...args) {
+    let cb = args.pop()
     let _value = bl()
-    let hasher = this._createHasher(this._algo, (err, hash) => {
+    let hasher = this._createHasher(...args, (err, hash) => {
       if (err) return cb(err)
       this._store.set(hash, _value)
       cb(null, hash)
