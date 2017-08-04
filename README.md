@@ -21,23 +21,18 @@ This module contains compliance tests and two reference implementations (filesys
 
 ```javascript
 class Store {
-  set (value, cb) {
+  async set (value, cb) {
     // value is either a Buffer or a Stream, both must be supported.
     // cb(Error, Hash)
     // Hash must be consistent. Data written with Buffer or Stream should
     // be identical.
     // Hash must be a String.
   }
-  getBuffer (hash, cb) {
+  async get (hash, cb) {
     // Hash must be a String.
-    // cb(Error, Buffer)
+    // returns a buffer.
   }
-  getStream (hash) {
-    // Returns a stream.
-    // If hash is not found in store emit an error.
-    // All stored hashes must be accessible as Buffer or Stream.
-  }
-  hash (value, cb) {
+  async hash (value, cb) {
     // Identical method signature to set but MUST NOT store the value.
   }
 }
@@ -49,10 +44,10 @@ of an implementation.
 
 ```javascript
 class Store {
-  set (value, ...args, cb) {
+  async set (value, ...args) {
     // Optional args are sent to the hashing function..
   }
-  hash (value, ...args, cb) {
+  async hash (value, ...args) {
     // Optional args are sent to the hashing function.
   }
 }
@@ -62,11 +57,9 @@ class Store {
 
 ```javascript
 let store = require('lucass/inmemory')()
-store.set(Buffer.from('asdf'), (err, hash) => {
-  store.getBuffer(hash, (err, value) => {
-    console.log(value.toString) // 'asdf'
-  })
-})
+let hasher = await store.set(Buffer.from('asdf'))
+let value = await store.getBuffer(hash)
+console.log(value.toString()) // 'asdf'
 ```
 
 Additionally, all methods in the spec are implemented.
@@ -75,11 +68,9 @@ Additionally, all methods in the spec are implemented.
 
 ```javascript
 let store = require('lucass/fs')('/var/custom-directory')
-store.set(Buffer.from('asdf'), (err, hash) => {
-  store.getBuffer(hash, (err, value) => {
-    console.log(value.toString) // 'asdf'
-  })
-})
+let hasher = await store.set(Buffer.from('asdf'))
+let value = await store.getBuffer(hash)
+console.log(value.toString()) // 'asdf'
 ```
 
 Additionally, all methods in the spec are implemented.

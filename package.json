@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "tap tests/*.js --100 && standard",
-    "cover": "tap tests/*.js --coverage-report=lcov && codecov",
+    "coverage": "tap tests/*.js --coverage-report=lcov && codecov",
     "precommit": "npm test",
     "prepush": "npm test",
     "commitmsg": "validate-commit-msg",
@@ -20,10 +20,8 @@
   "author": "Mikeal Rogers <mikeal.rogers@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
-    "bl": "^1.2.1",
-    "hashes-stream": "^1.1.0",
-    "tap": "^10.7.0",
-    "through2": "^2.0.3"
+    "multihasher": "^1.0.0",
+    "tap": "^10.7.0"
   },
   "devDependencies": {
     "codecov": "^2.2.0",
