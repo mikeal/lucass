@@ -50,6 +50,9 @@ class Store {
   async hash (value, ...args) {
     // Optional args are sent to the hashing function.
   }
+  async missing (hashes) {
+    // Optional array of hashes. Missing hashes will be returned.
+  }
 }
 ```
 

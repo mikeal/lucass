@@ -23,6 +23,12 @@ class InMemoryContentAddressableStorage {
     this._store.set(hash, value)
     return hash
   }
+
+  async missing (hashes) {
+    let have = new Set(this._store.keys())
+    let diff = new Set(hashes.filter(h => !have.has(h)))
+    return Array.from(diff)
+  }
 }
 
 module.exports = hasher => new InMemoryContentAddressableStorage(hasher)
