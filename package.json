@@ -21,7 +21,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "multihasher": "^1.0.0",
-    "tap": "^10.7.0"
+    "tap": "^13.1.6"
   },
   "devDependencies": {
     "codecov": "^2.2.0",
