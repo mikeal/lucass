@@ -29,7 +29,7 @@
     "coveralls": "^2.13.1",
     "cracks": "^3.1.2",
     "cz-conventional-changelog": "^2.0.0",
-    "husky": "^0.14.3",
+    "husky": "^2.7.0",
     "rimraf": "^2.6.1",
     "semantic-release": "^7.0.1",
     "standard": "^10.0.2",
